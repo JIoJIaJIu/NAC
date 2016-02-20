@@ -10,6 +10,6 @@ Misuse detection model
 * [Cisco Secure Intrusion Detection System](http://www.cisco.com/en/US/products/hw/vpndevc/ps4077/prod_eol_notice09186a008009230e.html)
 
 ##Resources
-* [The Application of Artificial Neural Networks](The_Application_of_Artificial_Neural_Networks_to_.pdf)
+* [The Application of Artificial Neural Networks](docs/The_Application_of_Artificial_Neural_Networks_to_.pdf)
 * [Introduction to Neural Networks](http://lia.univ-avignon.fr/chercheurs/torres/livres/book-neuro-intro.pdf)
 * [Application of Neural Network to Intrusion Detection](https://www.sans.org/reading-room/whitepapers/detection/application-neural-networks-intrusion-detection-336)
