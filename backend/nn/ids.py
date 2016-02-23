@@ -11,7 +11,7 @@ def create_net(DS):
     hidden1Layer = SigmoidLayer(3)
     hidden2Layer = SigmoidLayer(3)
     hidden3Layer = SigmoidLayer(4)
-    outLayer = SigmoidLayer(DS.nClasses)
+    outLayer = SigmoidLayer(DS.outdim)
 
     net = FeedForwardNetwork()
     net.addInputModule(inLayer)
@@ -29,6 +29,7 @@ def create_net(DS):
     net.addConnection(hidden3_to_out)
 
     net.sortModules()
+    return net
 
 class PacketFactory(object):
     flags = json.load(open(join(os.getcwd(), './data/flags.json')))

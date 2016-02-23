@@ -39,8 +39,7 @@ def load_kdd_names():
         print 'File already downloaded. Delete it by hand if you want to reload it <%s>' % KDD_NAMES_OUTPUT
     else:
         print 'Download %s' % KDD_NAMES_URL
-        fd = urllib.urlopen(KDD_NAMES_URL)
-        fd.write(KDD_NAMES_OUTPUT)
+        urllib.urlretrieve(KDD_NAMES_URL, KDD_NAMES_OUTPUT)
 
     datas = open(KDD_NAMES_OUTPUT)
     attacks = datas.readline()[:-2].split(',')
@@ -87,13 +86,14 @@ def train():
     print 'Start training'
     test, train = DS.splitWithProportion(0.25)
     print "Number of training patterns: ", len(train)
-    #print "Input and output dimensions: ", train.indim, train.outdim
+    print "Input and output dimensions: ", train.indim, train.outdim
     print "First sample (input, target, class):"
     print train['input'][0], train['class']
     print train['target'][0]
     print DS.calculateStatistics()
     print DS.classHist
 
-    trainer = BackpropTrainer(net, DS)
+    trainer = BackpropTrainer(net, DS, verbose=True)
     trainer.train()
+    print 'Successfull training'
     return [net, DS]
