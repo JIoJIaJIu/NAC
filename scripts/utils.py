@@ -19,13 +19,13 @@ def get_protocol(p):
     return 'unknown'
 
 def get_service(p):
-    pass
+    return 'http'
 
 def get_flag(p):
-    pass
+    return 'S0'
 
 def get_src_bytes(p):
-    pass
+    return 0
 
 def get_dst_bytes(p):
-    pass
+    return 0

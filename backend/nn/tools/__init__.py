@@ -18,6 +18,7 @@ KDD_NAMES_OUTPUT = join(os.getcwd(), './data/kdd.names')
 
 # count of datas
 COUNT = 100000
+#COUNT = 100
 
 def progress(count, block_size, total):
     percent = int(count * block_size * 100 / total)
@@ -92,6 +93,9 @@ def train():
     print train['target'][0]
     print DS.calculateStatistics()
     print DS.classHist
+
+    print '-' * 100
+    print net.params
 
     trainer = BackpropTrainer(net, DS, verbose=True)
     trainer.train()

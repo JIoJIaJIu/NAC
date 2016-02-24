@@ -47,6 +47,7 @@ class PacketFactory(object):
             'udp': 0,
             'tcp': 1,
             'icmp': 2,
+            'unknown': 3
         }[data]
 
     @classmethod

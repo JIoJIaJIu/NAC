@@ -15,6 +15,10 @@
 *`pip install scapy` - установить скапи(под рутом)
 *`sudo python scripts/sniff.py` - сниффинг пакетов
 * [Установить PyBrain](http://pybrain.org/docs/index.html#installation)
-* `cd backend && python server.py`
+* `cd backend && python setup.py && python app.py`
 * открыть localhost:8000
 
+### Scapy
+* `cd scripts`
+* `sudo python sniff.py`
+* Получившийся файл отправьте по форме на клиенте

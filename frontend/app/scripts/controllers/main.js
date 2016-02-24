@@ -9,9 +9,8 @@
  */
 angular.module('frontendApp')
   .controller('MainCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
   });
+
+angular.module('frontendApp')
+  .controller('Form', ['$scope', 'upload', function ($scope, upload) {
+  }]);
