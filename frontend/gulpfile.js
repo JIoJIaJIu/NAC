@@ -136,7 +136,7 @@ gulp.task('test', ['start:server:test'], function () {
 gulp.task('bower', function () {
   return gulp.src(paths.views.main)
     .pipe(wiredep({
-      directory: yeoman.app + '/bower_components',
+      directory: 'bower_components',
       ignorePath: '..'
     }))
   .pipe(gulp.dest(yeoman.app + '/views'));
@@ -163,8 +163,8 @@ gulp.task('client:build', ['html', 'styles'], function () {
     .pipe(cssFilter)
     .pipe($.minifyCss({cache: true}))
     .pipe(cssFilter.restore())
-    .pipe($.rev())
-    .pipe($.revReplace())
+    //.pipe($.rev())
+    //.pipe($.revReplace())
     .pipe(gulp.dest(yeoman.dist));
 });
 
@@ -189,6 +189,8 @@ gulp.task('copy:extras', function () {
 });
 
 gulp.task('copy:fonts', function () {
+  gulp.src('bower_components/bootstrap/fonts/**/*')
+    .pipe(gulp.dest(yeoman.dist + '/fonts'));
   return gulp.src(yeoman.app + '/fonts/**/*')
     .pipe(gulp.dest(yeoman.dist + '/fonts'));
 });

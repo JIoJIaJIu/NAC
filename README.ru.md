@@ -5,6 +5,13 @@
 * Используемыe ресуры указаны в [README.md](README.md)
 
 ## Запуск
+
+### Клиент
+Необходим nodejs
+* `npm install -g gulp bower`
+* `cd frontend && bash deploy.sh` 
+
+### Сервер
 *`pip install scapy` - установить скапи(под рутом)
 *`sudo python scripts/sniff.py` - сниффинг пакетов
 * [Установить PyBrain](http://pybrain.org/docs/index.html#installation)

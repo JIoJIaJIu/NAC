@@ -1,2 +1,5 @@
 *.sw?
 *.pyc
+ backend/dist/**
+ backend/nn.egg-info/**
+ backend/public/**
