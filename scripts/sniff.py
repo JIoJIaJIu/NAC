@@ -11,7 +11,7 @@ def _sniff():
    print 'Sniffing..'
    p = sniff(prn=lambda p: p.summary())
    print 'Stop'
-   file_name = 'packets.%s.mpcap' % int(time.time())
+   file_name = 'packets.%s.my.pcap' % int(time.time())
    p = normalize(p)
    fd = open(file_name, 'w')
    fd.write(p)
@@ -23,7 +23,7 @@ def normalize(p):
     data = []
     frames = build_frames(p)
     # skip unknow protocol
-    frames = filter(lambda f: f[1] != 'unknown', frames)
+    frames = filter(lambda f: f[2] != 'unknown', frames)
     return json.dumps(frames)
 
 # trasform raw packets in 2sec frame
@@ -38,7 +38,7 @@ def build_frames(p):
 
     for p in unans:
         frame = build_frame_from_single(p)
-        frames.append()
+        frames.append(frame)
     return frames
 
 

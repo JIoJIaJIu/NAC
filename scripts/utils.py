@@ -23,19 +23,17 @@ def get_protocol(p):
 # domain
 # http_443
 #
-def get_service(r, s):
-    print '--' * 30
-    print r.show() ,'\n\n', s.show()
+def get_service(r, s=None):
     if r.haslayer('TCP'):
         tcp = r['TCP']
-        if tcp.dport == 'http':
+        if tcp.dport == 80:
             return 'http'
-        elif tcp.dport == 'https':
+        elif tcp.dport == 443:
             return 'http_443'
 
     elif r.haslayer('UDP'):
         udp = r['UDP']
-        if udp.dport == 'domain':
+        if udp.dport == 53:
             return 'domain'
         
     return 'unknown'
@@ -81,5 +79,7 @@ def get_dst_bytes(s):
     return len(s)
 
 def is_land(r):
+    if not r.haslayer('IP'):
+        return 0
     ip = r['IP']
     return 1 if ip.dst == ip.src else 0
