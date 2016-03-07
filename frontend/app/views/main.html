@@ -5,10 +5,10 @@
     <div ng-if="state">
         <div>Результат: {{state}}</div>
     </div>
+    <p ng-if="progress">{{progressPercent}}</p>
     <div class="form-group">
-        <label for="upload">Загрузите mpcap файл</label>
-        <input type="file" id="upload" class="form-control" name="mcap"/>
+        <label for="upload">Загрузите .my.pcap файл</label>
     </div>
-    <p><input class="btn btn-lg btn-success" type="submit" value="Upload"/></p>
+    <div class="btn btn-lg btn-success" ngf-select="doUpload($file)">Upload</div>
   </form>
 </div>

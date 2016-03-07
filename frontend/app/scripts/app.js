@@ -16,7 +16,7 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'lr.upload'
+    'ngFileUpload'
   ])
   .config(function ($routeProvider) {
     $routeProvider
