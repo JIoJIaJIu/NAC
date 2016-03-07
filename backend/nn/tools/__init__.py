@@ -10,8 +10,10 @@ from pybrain.supervised.trainers import BackpropTrainer
 
 from nn.ids import PacketFactory, create_net
 
-KDD_URL = 'http://kdd.ics.uci.edu/databases/kddcup99/kddcup.data.gz'
-KDD_OUTPUT = join(os.getcwd(), './data/kdd.gz')
+KDD_URL = 'https://web.archive.org/web/20150406000710/http://nsl.cs.unb.ca/NSL-KDD/KDDTest+.txt'
+KDD_V2_URL = 'http://kdd.ics.uci.edu/databases/kddcup99/kddcup.data.gz'
+KDD_OUTPUT = join(os.getcwd(), './data/kddtrain.arff')
+KDD_V2_OUTPUT = join(os.getcwd(), './data/kdd.gz')
 
 KDD_NAMES_URL = 'http://kdd.ics.uci.edu/databases/kddcup99/kddcup.names'
 KDD_NAMES_OUTPUT = join(os.getcwd(), './data/kdd.names')
@@ -25,14 +27,16 @@ def progress(count, block_size, total):
     sys.stdout.write("\rdownloading...%d%%" % percent)
     sys.stdout.flush()
 
-def download_kdd():
-    realpath = os.path.realpath(KDD_OUTPUT)
-    print 'Download %s' % KDD_URL
+def download_kdd(v2=False):
+    output = KDD_OUTPUT if not v2 else KDD_V2_OUTPUT
+    url = KDD_URL if not v2 else KDD_V2_URL
+    realpath = os.path.realpath(output)
+    print 'Download %s' % url
     if os.path.exists(realpath):
-        print 'File already downloaded. Delete it by hand if you want to reload it <%s>' % KDD_OUTPUT
+        print 'File already downloaded. Delete it by hand if you want to reload it <%s>' % output
         return
     kdd = urllib.URLopener()
-    kdd.retrieve(KDD_URL, realpath, reporthook=progress)
+    kdd.retrieve(url, realpath, reporthook=progress)
 
 def load_kdd_names():
     realpath = os.path.realpath(KDD_NAMES_OUTPUT)
@@ -65,19 +69,29 @@ class TrainCommand(Command):
     def run(self):
         train()
 
-def train():
-    download_kdd()
+def train(v2=None):
+    print 'Use %s data set' % ('v1' if not v2 else 'v2')
+    download_kdd(v2)
     [attacks, names] = load_kdd_names()
-    print attacks
+    if not v2:
+        attacks = ['normal', 'anomaly']
+    print "Available classes: %s" % ', '.join(attacks)
     DS = ClassificationDataSet(len(names) - 1, nb_classes=len(attacks), class_labels=attacks)
 
-    fd = open(KDD_OUTPUT)
     factory = PacketFactory(names)
 
-    with gzip.open(KDD_OUTPUT) as f:
+    if v2:
+        fd = gzip.open(KDD_V2_OUTPUT)
+    else:
+        fd = open(KDD_OUTPUT)
+
+    with fd as f:
         for line in islice(f, COUNT):
-            data = line[:-2].split(',')
+            data = line[:-1].split(',')
             class_name = data[-1]
+            # remove trailing .
+            if v2:
+                class_name = class_name[:-1]
             id = attacks.index(class_name)
 
             packet = factory.create_packet(data[:-1])

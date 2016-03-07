@@ -8,9 +8,9 @@ from pybrain.structure import *
 
 def create_net(DS):
     inLayer = LinearLayer(DS.indim)
-    hidden1Layer = SigmoidLayer(3)
-    hidden2Layer = SigmoidLayer(3)
-    hidden3Layer = SigmoidLayer(4)
+    hidden1Layer = SigmoidLayer(10)
+    hidden2Layer = SigmoidLayer(10)
+    hidden3Layer = SigmoidLayer(10)
     outLayer = SigmoidLayer(DS.outdim)
 
     net = FeedForwardNetwork()
@@ -47,7 +47,6 @@ class PacketFactory(object):
             'udp': 0,
             'tcp': 1,
             'icmp': 2,
-            'unknown': 3
         }[data]
 
     @classmethod

@@ -10,6 +10,9 @@ Misuse detection model
 * [Cisco Secure Intrusion Detection System](http://www.cisco.com/en/US/products/hw/vpndevc/ps4077/prod_eol_notice09186a008009230e.html)
 
 ##Resources
+* [NSL-KDD](https://web.archive.org/web/20150205070216/http://nsl.cs.unb.ca/NSL-KDD/)
+* [Explanation KDD99](http://shodhganga.inflibnet.ac.in/bitstream/10603/9850/8/08_chapter%203.pdf)
+* [Why avoid KDD99](http://www.kdnuggets.com/news/2007/n18/4i.html)
 * [KDD99](http://kdd.ics.uci.edu/databases/kddcup99/kddcup99.html)
 * [Publicly available PCAP files](http://www.netresec.com/?page=PcapFiles)
 * [Crack traces](https://wiki.wireshark.org/SampleCaptures#Crack_Traces)

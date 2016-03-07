@@ -15,7 +15,9 @@
 *`pip install scapy` - установить скапи(под рутом)
 *`sudo python scripts/sniff.py` - сниффинг пакетов
 * [Установить PyBrain](http://pybrain.org/docs/index.html#installation)
-* `cd backend && python setup.py && python app.py`
+* `cd backend && python setup.py`
+* `python app.py` - с NSL-KDD сетом
+* или `python app.py --v2` - с KDD99
 * открыть localhost:8000
 
 ### Scapy

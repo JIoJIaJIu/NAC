@@ -2,4 +2,4 @@
 *.pyc
  backend/dist/**
  backend/nn.egg-info/**
- backend/public/**
+ backend/public
