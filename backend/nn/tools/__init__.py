@@ -38,7 +38,7 @@ def download_kdd(v2=False):
     kdd = urllib.URLopener()
     kdd.retrieve(url, realpath, reporthook=progress)
 
-def load_kdd_names():
+def load_kdd_names(v2=False):
     realpath = os.path.realpath(KDD_NAMES_OUTPUT)
     if os.path.exists(realpath):
         print 'File already downloaded. Delete it by hand if you want to reload it <%s>' % KDD_NAMES_OUTPUT
@@ -54,6 +54,8 @@ def load_kdd_names():
         [key, _] = line[:-1].split(':')
         names.append(key)
     names.append('state')
+    if not v2:
+        attacks = ['normal', 'anomaly']
     return [attacks, names]
 
 class TrainCommand(Command):
@@ -72,9 +74,7 @@ class TrainCommand(Command):
 def train(v2=None):
     print 'Use %s data set' % ('v1' if not v2 else 'v2')
     download_kdd(v2)
-    [attacks, names] = load_kdd_names()
-    if not v2:
-        attacks = ['normal', 'anomaly']
+    [attacks, names] = load_kdd_names(v2)
     print "Available classes: %s" % ', '.join(attacks)
     DS = ClassificationDataSet(len(names) - 1, nb_classes=len(attacks), class_labels=attacks)
 

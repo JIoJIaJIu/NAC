@@ -6,24 +6,33 @@ from nn.ids import PacketFactory
 import json
 import sys
 
-[attacks, names] = load_kdd_names()
-
 PORT = 8000
 net = None 
+v2 = False
+
 def upload(req):
-    data = req.POST['mcap'].file.read()
+    [attacks, names] = load_kdd_names(v2)
+
+    data = req.POST['file'].file.read()
     data = json.loads(data)
     factory = PacketFactory(names)
     response = []
+
     for row in data:
         p = factory.create_packet(row)
         response.append(net.activate(p.get_data())[0])
-    #TODO;
-    return Response('<br/>'.join(map(lambda x: str(x), response)))
+
+    class_index = round(max(response))
+    print class_index, response
+
+    class_name = attacks[class_index]
+    hasIntrusion = class_name 
+    return Response(json.dump({'hasIntrusion': hasIntrusion}))
 
 
 if __name__ == '__main__':
     global net
+    global v2
 
     try:
         if sys.argv.index('--v2'):
