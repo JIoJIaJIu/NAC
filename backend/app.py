@@ -22,12 +22,11 @@ def upload(req):
         p = factory.create_packet(row)
         response.append(net.activate(p.get_data())[0])
 
-    class_index = round(max(response))
-    print class_index, response
+    class_index = int(round(max(response or [])))
+    print response;
 
     class_name = attacks[class_index]
-    hasIntrusion = class_name 
-    return Response(json.dump({'hasIntrusion': hasIntrusion}))
+    return Response(json.dumps({'className': class_name}))
 
 
 if __name__ == '__main__':

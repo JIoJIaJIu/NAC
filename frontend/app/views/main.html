@@ -1,14 +1,14 @@
 <div class="jumbotron">
   <h1>IDS NN</h1>
   <p class="lead"><img src="images/ids.jpg" width="200px"/></p>
-  <form ng-controller="Form" action="/upload" method="POST" enctype="multipart/form-data">
+  <form ng-controller="Form">
     <div ng-if="state">
         <div>Результат: {{state}}</div>
     </div>
-    <p ng-if="progress">{{progressPercent}}</p>
+    <p ng-if="progress">{{progressPercent}}%</p>
     <div class="form-group">
         <label for="upload">Загрузите .my.pcap файл</label>
     </div>
-    <div class="btn btn-lg btn-success" ngf-select="doUpload($file)">Upload</div>
+    <div class="btn btn-lg btn-success" ngf-select="doUpload($event, $file)">Upload</div>
   </form>
 </div>

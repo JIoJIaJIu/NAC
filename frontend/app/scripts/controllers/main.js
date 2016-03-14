@@ -13,14 +13,25 @@ angular.module('frontendApp')
 
 angular.module('frontendApp')
   .controller('Form', ['$scope', 'Upload', function ($scope, Upload) {
-    $scope.doUpload = function (file) {
+    $scope.doUpload = function (event, file) {
+        event.preventDefault();
+        if (!file)
+          return;
         $scope.progress = true; 
         Upload.upload({
             url: '/upload',
             data: {file: file}
         }).then(function (resp) {
-            console.log('Success:  ' + resp.data);
+            var data = resp.data;
+            var className = data.className;
+            var hasIntrusion = className !== 'normal';
+            console.log('Success:  ' + JSON.stringify(resp.data));
             $scope.progress = false; 
+            if (hasIntrusion) {
+                alert('Нарушениe контроля доступа!');
+            } else {
+                alert('Нет нарушения контроля доступа');
+            }
         }, function (resp) {
             console.log('Error status: ' + resp.status);
             $scope.progress = false; 
